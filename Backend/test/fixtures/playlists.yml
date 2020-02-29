@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  playlist_song: one
+  user: one
 
 two:
   name: MyString
-  playlist_song: two
+  user: two
