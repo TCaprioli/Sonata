@@ -1,0 +1,101 @@
+html,body {
+    height:100%;
+    padding: 0;
+    margin:0;
+}
+h1, h2, h3, h4, h5, h6{
+    line-height: 10px; 
+    
+  }
+
+#mainContent {
+    min-height: 100%;
+    padding: 0;
+
+}
+
+#header{
+position: relative;
+background: #FFC48C;
+height: 100px;
+width: 100%;
+border: 2px solid #0B0A0A
+}
+
+#footer {
+background: #FFC48C;
+height: 100px;
+clear: both;
+border: 2px solid #0B0A0A
+}
+
+#col1 {
+background: #BAE4E5;
+}
+
+#col2 {
+background:#BAE4E5;
+}
+
+#col3 {
+background: #BAE4E5;
+}
+
+.column.side{
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+.column.main{
+    width: 50%;
+    height: 100%;
+    float:left;
+}
+
+#art-container{
+
+position: absolute;
+width: 400px;
+height: 400px;
+left: 450px;
+top: 157px;
+}
+
+#art {
+    max-width: 100%;
+}
+
+#song{
+    position: absolute;
+    top: 650;
+    left: 495;
+}
+
+#song-container {
+    position: absolute;
+    background: white;
+    width: 200px;
+    height: 200px;
+    top: 200;
+    left: 200;
+    overflow: scroll;
+}
+
+#playlist-container {
+    position: absolute;
+    background: white;
+    width: 200px;
+    height: 200px;
+    top: 200;
+    left: 900;
+    overflow: scroll;
+}
+
+#song-detail {
+    position: absolute;
+    background: #BAE4E5;
+    width: 200px;
+    height: 80px;
+    top: 560;
+    left: 550;
+}
