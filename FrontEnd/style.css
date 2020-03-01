@@ -115,5 +115,6 @@ text-align: center;
 
 .div-song-name:hover{
     background: #FFC48C;
+    cursor: default;
    
 }
