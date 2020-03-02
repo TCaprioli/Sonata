@@ -13,7 +13,7 @@ let songsObj = {
 
 let songList = document.querySelector('#song-list')
 let playlist = document.querySelector('#playlist-list')
-let title = document.querySelector('#title')
+let titleText = document.querySelector('#title')
 let art = document.querySelector('#art')
 let player = document.querySelector('#song-player')
 let artist = document.querySelector('#artist')
@@ -28,19 +28,43 @@ let artistArray = Object.values(songsObj).map(e => e.artist)
 
 
 function renderSongs(){
-    titleArray.forEach(song => {
-        let div = document.createElement('div')
-        div.className = 'div-song-name'
-        div.innerText = song
-        songList.appendChild(div)
+    fetchContent().then(contentObject =>{
+        nestedSongsArray = contentObject.songs
+        nestedArtistsArray = contentObject.artists
+        titleArray = nestedSongsArray.map(songInst => songInst.name)
 
-        div.addEventListener('click', event => {
-            let lowerSong = song.replace(/ /g,'-').toLowerCase()
-            title.innerText = song
-            art.src = artArray.filter(e => e.includes(lowerSong))
-            player.src = songArray.filter(e => e.includes(lowerSong))
-            artist.innerText = artistArray.filter(e => e.includes(lowerSong))
+        titleArray.forEach(title => {
+
             
+            let div = document.createElement('div')
+            div.className = 'div-song-name'
+            div.innerText = title
+            songList.appendChild(div)
+            div.addEventListener('click', event => {
+                
+                let desiredObject = nestedSongsArray.find(e => e.name === title)
+                let newSelectedArtist = nestedArtistsArray.find(e => e.id === desiredObject.artist_id)
+                
+                artist.innerText = newSelectedArtist.name
+                titleText.innerText = title
+                art.src = `songData/jpg/${desiredObject.cover_art}`
+                player.src = `songData/mp3/${desiredObject.mp3}`
+                   
+            })
+        })
+    })
+    
+}
+
+function renderArtists(){
+    fetchContent().then(contentObject => {
+        let nestedArtistsArray = contentObject.artists  
+        let artistArray = nestedArtistsArray.map(e => e.name)
+        artistArray.forEach(name => {
+            let div = document.createElement('div')
+            div.className = 'div-artist-name'
+            div.innerText = name
+            songList.appendChild(div)
         })
     })
 }
@@ -67,8 +91,8 @@ playForm.addEventListener('submit', event => {
             renderSongs()
         }
         if (selection === 'Artists'){
-            
-            songList.innerText = "I'm working"
+            songList.innerHTML = ""
+            renderArtists()
         }
     })
 
@@ -77,13 +101,9 @@ playForm.addEventListener('submit', event => {
 function fetchContent(){
     return fetch('http://localhost:3000/playlist_songs')
     .then(resp => resp.json())
-    .then( contentObject => {
-        fullSongArray = contentObject.songs
-
-        titleArray = fullSongArray.map(song => song.name)
-        console.log(contentObject.artists)})
 }
 
-fetchContent()
+
 renderSongs()
+
 console.log(artistArray)
