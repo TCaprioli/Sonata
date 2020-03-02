@@ -58,6 +58,22 @@ playForm.addEventListener('submit', event => {
     modal.style.display = 'none'
 })
 
+    let banner = document.querySelector('#banner-title')
+
+    banner.addEventListener('click', event => {
+        let selection = event.target.innerText
+        if (selection === 'Songs'){
+            songList.innerHTML = ""
+            renderSongs()
+        }
+        if (selection === 'Artists'){
+            
+            songList.innerText = "I'm working"
+        }
+    })
+
+
+
 function fetchContent(){
     return fetch('http://localhost:3000/playlist_songs')
     .then(resp => resp.json())

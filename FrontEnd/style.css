@@ -2,9 +2,11 @@ html,body {
     height:100%;
     padding: 0;
     margin:0;
+    
 }
 h1, h2, h3, h4, h5, h6{
     line-height: 10px; 
+   
     
   }
   li {
@@ -86,6 +88,7 @@ box-shadow: 2.5px 5px #888888;
     left: 200;
     border: 1px solid;
     overflow: scroll;
+    border-radius: 25px
 }
 
 #playlist-container {
@@ -98,6 +101,7 @@ box-shadow: 2.5px 5px #888888;
     left: 900;
     border: 1px solid;
     overflow: scroll;
+    border-radius: 25px
 }
 
 #song-detail {
@@ -176,4 +180,8 @@ form {
         background: #FFC48C;
         cursor: default;
        
+    }
+
+    #banner-title{
+        cursor: default;
     }
