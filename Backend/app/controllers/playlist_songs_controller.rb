@@ -12,6 +12,6 @@ class PlaylistSongsController < ApplicationController
       "artists": @artist
     }
 
-    render json: info
+    render json: info.to_json(except: [:created_at, :updated_at])
   end
 end
