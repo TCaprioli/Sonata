@@ -44,8 +44,8 @@ playBtn.addEventListener('click', event => {
     let modal = document.createElement('div')
     let col3 = document.querySelector('#col3')
     modal.className = 'modal'
-    modal.innerHTML = 
-    "<form><label name ='playlist-name'>Name:</label><input type='text' name='playlist-name'></input><input type='submit'></input></form>"
+    
+    let form = document.createElement('form')
     modal.style.display = 'block'
     col3.append(modal)
     
