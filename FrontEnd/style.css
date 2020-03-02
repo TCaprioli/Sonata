@@ -75,7 +75,7 @@ box-shadow: 2.5px 5px #888888;
 #song{
     position: absolute;
     top: 650;
-    left: 495;
+    left: 510;
 }
 
 #song-container {
@@ -108,10 +108,10 @@ box-shadow: 2.5px 5px #888888;
     position: absolute;
     background: #BAE4E5;
     text-align: center;
-    width: 200px;
+    width: 280px;
     height: 80px;
     top: 560;
-    left: 550;
+    left: 520;
 }
 
 
@@ -123,6 +123,16 @@ height: 30px;
     background: #FFC48C;
     cursor: default;
    
+}
+
+.div-artist-name{
+    height: 30px;
+    }
+    
+.div-artist-name:hover{
+    background: #FFC48C;
+    cursor: default;
+    
 }
 
 #btn{
