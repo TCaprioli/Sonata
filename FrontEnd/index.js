@@ -2,7 +2,7 @@ let songsObj = {
     jaAraE : {
         title: 'JA ARA E',
         art: 'songData/jpg/ja-ara-e.jpg',
-        artist: 'Burna Boy',
+        artist: 'Burna Boy', 
         mp3: 'songData/mp3/ja-ara-e.mp3'},
     bestPart: {
         title:'Best Part',
@@ -38,6 +38,18 @@ function renderSongs(){
         })
     })
 }
+
+let playBtn = document.querySelector('#btn')
+playBtn.addEventListener('click', event => {
+    let modal = document.createElement('div')
+    let col3 = document.querySelector('#col3')
+    modal.className = 'modal'
+    modal.innerHTML = 
+    "<form><label name ='playlist-name'>Name:</label><input type='text' name='playlist-name'></input><input type='submit'></input></form>"
+    modal.style.display = 'block'
+    col3.append(modal)
+    
+})
 
 renderSongs()
 console.log(artistArray)

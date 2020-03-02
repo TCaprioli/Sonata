@@ -12,3 +12,12 @@
 // }
 /*Object.values will allow me to map out desired keys from nested objects
 console.log(Object.values(songsObj).map(e => e.title))*/ 
+
+<div id='modal'>
+    <form>
+        <label name ='playlist-name'>Name:</label>
+        <input type='text' name='playlist-name'></input>
+        <input type='submit'></input>
+
+    </form>
+</div>
