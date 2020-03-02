@@ -56,11 +56,14 @@ playForm.addEventListener('submit', event => {
     playlist.append(div)
 
     modal.style.display = 'none'
-
-    
-
 })
 
+function fetchContent(){
+    return fetch('http://localhost:3000/playlist_songs')
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+}
 
+fetchContent()
 renderSongs()
 console.log(artistArray)
