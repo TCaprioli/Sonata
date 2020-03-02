@@ -77,7 +77,11 @@ playForm.addEventListener('submit', event => {
 function fetchContent(){
     return fetch('http://localhost:3000/playlist_songs')
     .then(resp => resp.json())
-    .then(json => console.log(json))
+    .then( contentObject => {
+        fullSongArray = contentObject.songs
+
+        titleArray = fullSongArray.map(song => song.name)
+        console.log(contentObject.artists)})
 }
 
 fetchContent()
