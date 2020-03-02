@@ -12,14 +12,20 @@ let songsObj = {
 }
 
 let songList = document.querySelector('#song-list')
+let playlist = document.querySelector('#playlist-list')
 let title = document.querySelector('#title')
 let art = document.querySelector('#art')
 let player = document.querySelector('#song-player')
 let artist = document.querySelector('#artist')
+
+//arrays mapped from test object
 let artArray = Object.values(songsObj).map(e => e.art)
 let titleArray = Object.values(songsObj).map(e => e.title)
 let songArray = Object.values(songsObj).map(e => e.mp3)
 let artistArray = Object.values(songsObj).map(e => e.artist)
+//------------------------------------------------
+
+
 
 function renderSongs(){
     titleArray.forEach(song => {
@@ -39,17 +45,45 @@ function renderSongs(){
     })
 }
 
-let playBtn = document.querySelector('#btn')
-playBtn.addEventListener('click', event => {
-    let modal = document.createElement('div')
-    let col3 = document.querySelector('#col3')
-    modal.className = 'modal'
-    modal.innerHTML = 
-    "<form><label name ='playlist-name'>Name:</label><input type='text' name='playlist-name'></input><input type='submit'></input></form>"
-    modal.style.display = 'block'
-    col3.append(modal)
-    
+let playForm = document.querySelector('#new-playlist-form')
+
+playForm.addEventListener('submit', event => {
+    event.preventDefault()
+    let input = playForm.querySelector('input').value
+    let div = document.createElement('div')
+    div.className = 'div-playlist-name'
+    div.innerText = input
+    playlist.append(div)
+
+    modal.style.display = 'none'
 })
 
+    let banner = document.querySelector('#banner-title')
+
+    banner.addEventListener('click', event => {
+        let selection = event.target.innerText
+        if (selection === 'Songs'){
+            songList.innerHTML = ""
+            renderSongs()
+        }
+        if (selection === 'Artists'){
+            
+            songList.innerText = "I'm working"
+        }
+    })
+
+
+
+function fetchContent(){
+    return fetch('http://localhost:3000/playlist_songs')
+    .then(resp => resp.json())
+    .then( contentObject => {
+        fullSongArray = contentObject.songs
+
+        titleArray = fullSongArray.map(song => song.name)
+        console.log(contentObject.artists)})
+}
+
+fetchContent()
 renderSongs()
 console.log(artistArray)
