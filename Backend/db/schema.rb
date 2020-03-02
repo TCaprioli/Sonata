@@ -17,26 +17,15 @@ ActiveRecord::Schema.define(version: 2020_02_28_221416) do
 
   create_table "artists", force: :cascade do |t|
     t.string "name"
-    t.bigint "info_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["info_id"], name: "index_artists_on_info_id"
-  end
-
-  create_table "infos", force: :cascade do |t|
-    t.bigint "info_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["info_id"], name: "index_infos_on_info_id"
   end
 
   create_table "playlist_songs", force: :cascade do |t|
     t.bigint "playlist_id", null: false
     t.bigint "song_id", null: false
-    t.bigint "info_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["info_id"], name: "index_playlist_songs_on_info_id"
     t.index ["playlist_id"], name: "index_playlist_songs_on_playlist_id"
     t.index ["song_id"], name: "index_playlist_songs_on_song_id"
   end
@@ -44,10 +33,8 @@ ActiveRecord::Schema.define(version: 2020_02_28_221416) do
   create_table "playlists", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id", null: false
-    t.bigint "info_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["info_id"], name: "index_playlists_on_info_id"
     t.index ["user_id"], name: "index_playlists_on_user_id"
   end
 
@@ -56,22 +43,17 @@ ActiveRecord::Schema.define(version: 2020_02_28_221416) do
     t.string "mp3"
     t.string "cover_art"
     t.bigint "artist_id", null: false
-    t.bigint "info_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["artist_id"], name: "index_songs_on_artist_id"
-    t.index ["info_id"], name: "index_songs_on_info_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.bigint "info_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["info_id"], name: "index_users_on_info_id"
   end
 
-  add_foreign_key "infos", "infos"
   add_foreign_key "playlist_songs", "playlists"
   add_foreign_key "playlist_songs", "songs"
   add_foreign_key "playlists", "users"
