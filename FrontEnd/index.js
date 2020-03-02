@@ -12,14 +12,20 @@ let songsObj = {
 }
 
 let songList = document.querySelector('#song-list')
+let playlist = document.querySelector('#playlist-list')
 let title = document.querySelector('#title')
 let art = document.querySelector('#art')
 let player = document.querySelector('#song-player')
 let artist = document.querySelector('#artist')
+
+//arrays mapped from test object
 let artArray = Object.values(songsObj).map(e => e.art)
 let titleArray = Object.values(songsObj).map(e => e.title)
 let songArray = Object.values(songsObj).map(e => e.mp3)
 let artistArray = Object.values(songsObj).map(e => e.artist)
+//------------------------------------------------
+
+
 
 function renderSongs(){
     titleArray.forEach(song => {
@@ -39,17 +45,22 @@ function renderSongs(){
     })
 }
 
-let playBtn = document.querySelector('#btn')
-playBtn.addEventListener('click', event => {
-    let modal = document.createElement('div')
-    let col3 = document.querySelector('#col3')
-    modal.className = 'modal'
+let playForm = document.querySelector('#new-playlist-form')
+
+playForm.addEventListener('submit', event => {
+    event.preventDefault()
+    let input = playForm.querySelector('input').value
+    let div = document.createElement('div')
+    div.className = 'div-playlist-name'
+    div.innerText = input
+    playlist.append(div)
+
+    modal.style.display = 'none'
+
     
-    let form = document.createElement('form')
-    modal.style.display = 'block'
-    col3.append(modal)
-    
+
 })
+
 
 renderSongs()
 console.log(artistArray)
