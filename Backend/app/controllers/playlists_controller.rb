@@ -1,6 +1,12 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :update, :destroy]
 
+  def index
+    @playlists = Playlist.all
+
+    render json: @playlists.to_json(except: [:created_at, :updated_at])
+  end
+
   def create
     @playlist = Playlist.create(playlist_params)
 

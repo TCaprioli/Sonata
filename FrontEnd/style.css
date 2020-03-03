@@ -193,5 +193,20 @@ form {
     }
 
     #banner-title{
-        cursor: default;
+        cursor: default; 
     }
+    #s-choice:hover {
+        background: #FFC48C
+    }
+
+    #a-choice:hover {
+        background: #FFC48C
+    }
+
+    #search {
+        height:15px;
+        width:15px;
+    }
+ .delete-btn{
+     text-align: right;
+ }

@@ -1,109 +1,162 @@
-let songsObj = {
-    jaAraE : {
-        title: 'JA ARA E',
-        art: 'songData/jpg/ja-ara-e.jpg',
-        artist: 'Burna Boy', 
-        mp3: 'songData/mp3/ja-ara-e.mp3'},
-    bestPart: {
-        title:'Best Part',
-        art:'songData/jpg/best-part.jpeg',
-        artist:'H.E.R & Daniel Ceasar',
-        mp3: 'songData/mp3/best-part.mp3'}
-}
-
+//column 1 elements
+let songCon = document.querySelector('#song-container')
+let searchInput = songCon.querySelector('.searchInput')
+let sInput = songCon.querySelector('#input')
 let songList = document.querySelector('#song-list')
-let playlist = document.querySelector('#playlist-list')
-let titleText = document.querySelector('#title')
+let search = document.querySelector('#search')
+let banner = document.querySelector('#banner-title')
+
+
+//column 2 elements
 let art = document.querySelector('#art')
 let player = document.querySelector('#song-player')
+let titleText = document.querySelector('#title')
 let artist = document.querySelector('#artist')
 
-//arrays mapped from test object
-let artArray = Object.values(songsObj).map(e => e.art)
-let titleArray = Object.values(songsObj).map(e => e.title)
-let songArray = Object.values(songsObj).map(e => e.mp3)
-let artistArray = Object.values(songsObj).map(e => e.artist)
-//------------------------------------------------
 
-
-
-function renderSongs(){
-    fetchContent().then(contentObject =>{
-        nestedSongsArray = contentObject.songs
-        nestedArtistsArray = contentObject.artists
-        titleArray = nestedSongsArray.map(songInst => songInst.name)
-
-        titleArray.forEach(title => {
-
-            
-            let div = document.createElement('div')
-            div.className = 'div-song-name'
-            div.innerText = title
-            songList.appendChild(div)
-            div.addEventListener('click', event => {
-                
-                let desiredObject = nestedSongsArray.find(e => e.name === title)
-                let newSelectedArtist = nestedArtistsArray.find(e => e.id === desiredObject.artist_id)
-                
-                artist.innerText = newSelectedArtist.name
-                titleText.innerText = title
-                art.src = `songData/jpg/${desiredObject.cover_art}`
-                player.src = `songData/mp3/${desiredObject.mp3}`
-                   
-            })
-        })
-    })
-    
-}
-
-function renderArtists(){
-    fetchContent().then(contentObject => {
-        let nestedArtistsArray = contentObject.artists  
-        let artistArray = nestedArtistsArray.map(e => e.name)
-        artistArray.forEach(name => {
-            let div = document.createElement('div')
-            div.className = 'div-artist-name'
-            div.innerText = name
-            songList.appendChild(div)
-        })
-    })
-}
-
+//column 3 elements
+let playlistCon = document.querySelector('#playlist-list')
 let playForm = document.querySelector('#new-playlist-form')
+let pInput = playForm.querySelector('input')
 
+
+//global data
+let allSongs = [];
+let allArtists =[];
+let allPlaylists =[];
+let allArtistsName =[];
+let allTitles =[];
+let allPlaylistsName =[];
+
+
+//-------------------------Render Functions----------------------------------
+
+
+
+function renderSongs(songs){
+   
+    songs.forEach(title => {
+ 
+        let div = document.createElement('div')
+        div.className = 'div-song-name'
+        div.innerText = title
+        songList.appendChild(div)
+
+        let selectedSong = allSongs.find(song => song.name === title)
+        let newSelectedArtist = allArtists.find(song => song.id === selectedSong.artist_id)
+
+        div.addEventListener('click', event => {
+            
+            artist.innerText = newSelectedArtist.name
+            titleText.innerText = title
+            art.src = `songData/jpg/${selectedSong.cover_art}`
+            player.src = `songData/mp3/${selectedSong.mp3}`     
+        })  
+    })  
+}
+
+function renderArtists(artists){
+      
+    artists.forEach(name => {
+        let div = document.createElement('div')
+        div.className = 'div-artist-name'
+        div.innerText = name
+        songList.appendChild(div)
+    })  
+}
+
+function renderPlaylists(playlists){
+    playlists.forEach(playlist => {
+        console.log(playlist)
+        let div = document.createElement('div')
+        div.className = 'div-playlist-name'
+        div.innerHTML = `${playlist} <button><img class='delete-btn' src='songData/jpg/delete.png'></button>`
+        playlistCon.append(div)
+    })
+}
+// //-------------------------------------------------------------------------
+
+// //-------------------------Event Handlers----------------------------------
+
+//post playlist
 playForm.addEventListener('submit', event => {
     event.preventDefault()
-    let input = playForm.querySelector('input').value
+     
     let div = document.createElement('div')
     div.className = 'div-playlist-name'
-    div.innerText = input
-    playlist.append(div)
+    div.innerText = pInput.value
+    playlistCon.append(div)
+    console.log(pInput.value)
+    fetch("http://localhost:3000/playlists",{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'},
+        body: JSON.stringify({name: pInput.value,
+        user_id: 2})
+    })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+
 
     modal.style.display = 'none'
 })
 
-    let banner = document.querySelector('#banner-title')
-
-    banner.addEventListener('click', event => {
-        let selection = event.target.innerText
-        if (selection === 'Songs'){
-            songList.innerHTML = ""
-            renderSongs()
-        }
-        if (selection === 'Artists'){
-            songList.innerHTML = ""
-            renderArtists()
-        }
-    })
+// playlistCon.addEventListener('click', event => {
+//     console.dir(event.target)
+// })
 
 
 
-function fetchContent(){
-    return fetch('http://localhost:3000/playlist_songs')
-    .then(resp => resp.json())
-}
+sInput.addEventListener('input', event => {
+    let userInput = event.target.value
+    titleArray = allSongs.map(songInst => songInst.name) 
+    let filtered
+    filtered = allTitles.filter(title => title.toLowerCase().includes(userInput))
+    console.log(filtered)
+    songList.innerText = ""
+    renderSongs(filtered)
+})
 
 
-renderSongs()
+banner.addEventListener('click', event => {
+    let selection = event.target.innerText
+    if (selection === 'Songs'){
+        songList.innerHTML = ""
+        renderSongs(allTitles)
+    }
+    if (selection === 'Artists'){
+        songList.innerHTML = ""
+        console.log(allArtistsName)
+        renderArtists(allArtistsName)
+    }
+})
 
-console.log(artistArray)
+search.addEventListener('mouseover', event => {
+    
+    if (searchInput.style.display === 'none')
+    {searchInput.style.display = 'block'}
+    else{
+    searchInput.style.display = 'none'}
+})
+
+   
+    
+
+
+//fetching data
+fetch('http://localhost:3000/playlist_songs')
+.then(resp => resp.json())
+.then(contentObject => {
+    allSongs = contentObject.songs
+    allArtists = contentObject.artists
+    allUsers = contentObject.users
+    allPlaylists = contentObject.playlists
+    allPlaylistsName = allPlaylists.map(playlist => playlist.name)
+    allTitles = allSongs.map(song => song.name)
+    allArtistsName = allArtists.map(artist => artist.name)
+    renderSongs(allTitles)
+    renderArtists(allArtistsName)
+    renderPlaylists(allPlaylistsName)
+    console.log(allSongs)
+})

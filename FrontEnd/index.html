@@ -11,7 +11,14 @@
      <div id ='mainContent'>
          <div id='col1' class='column side'>
              <div id='song-container'>
-                 <h4 id='banner-title'><span>Songs</span> | <span>Artists</span></h4>
+                 <h4 id='banner-title'><span id='s-choice'>Songs</span> | 
+                    <span id='a-choice'>Artists</span>
+                    <img id='search' src='songData/jpg/search.png'>
+                </h4>
+                <div class="searchInput" style="display: none;">
+                    <input  id='input' class="searchInput" type='text'>
+                </div>
+                
                  <hr>
                  <span id='song-list'></span>
                  
@@ -32,6 +39,7 @@
          </div>
          <div id='col3' class='column side'>
              <div id='playlist-container'>
+
                 <h4>Playlists <button id="btn">+</button></h4>
                 <hr>
                 <span id='playlist-list'></span>
