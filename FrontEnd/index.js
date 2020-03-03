@@ -33,46 +33,48 @@ let allPlaylistsName =[];
 
 
 
-function renderSongs(songs){
+function renderSong(title){
    
-    songs.forEach(title => {
- 
-        let div = document.createElement('div')
-        div.className = 'div-song-name'
-        div.innerText = title
-        songList.appendChild(div)
+    let div = document.createElement('div')
+    div.className = 'div-song-name'
+    div.innerText = title
+    songList.appendChild(div)
 
-        let selectedSong = allSongs.find(song => song.name === title)
-        let newSelectedArtist = allArtists.find(song => song.id === selectedSong.artist_id)
+    let selectedSong = allSongs.find(song => song.name === title)
+    let newSelectedArtist = allArtists.find(song => song.id === selectedSong.artist_id)
 
-        div.addEventListener('click', event => {
-            
-            artist.innerText = newSelectedArtist.name
-            titleText.innerText = title
-            art.src = `songData/jpg/${selectedSong.cover_art}`
-            player.src = `songData/mp3/${selectedSong.mp3}`     
-        })  
-    })  
-}
-
-function renderArtists(artists){
-      
-    artists.forEach(name => {
-        let div = document.createElement('div')
-        div.className = 'div-artist-name'
-        div.innerText = name
-        songList.appendChild(div)
-    })  
-}
-
-function renderPlaylists(playlists){
-    playlists.forEach(playlist => {
+    div.addEventListener('click', event => {
         
-        let div = document.createElement('div')
-        div.className = 'div-playlist-name'
-        div.innerHTML = `${playlist} <button><img class='delete-btn' src='songData/jpg/delete.png'></button>`
-        playlistCon.append(div)
-    })
+        artist.innerText = newSelectedArtist.name
+        titleText.innerText = title
+        art.src = `songData/jpg/${selectedSong.cover_art}`
+        player.src = `songData/mp3/${selectedSong.mp3}`     
+    })  
+    
+}
+
+function renderArtist(artist){
+    console.log(artist)
+    let div = document.createElement('div')
+    div.className = 'div-artist-name'
+    div.innerText = artist
+    songList.appendChild(div)
+
+}
+
+function renderPlaylist(playlist){
+   
+    let div = document.createElement('div')
+    div.dataset.id = playlist.id
+    div.className = 'div-playlist-name'
+    div.innerHTML = `${playlist.name} <button><img class='delete-btn' src='songData/jpg/delete.png'></button>`
+    playlistCon.append(div)
+}
+
+function renderEach(songs, playlists, artists){
+    songs.forEach(song => renderSong(song))
+    artists.forEach(artist => renderArtist(artist))
+    playlists.forEach(playlist => renderPlaylist(playlist))
 }
 // //-------------------------------------------------------------------------
 
@@ -103,11 +105,16 @@ playForm.addEventListener('submit', event => {
 })
 
 playlistCon.addEventListener('click', event => {
-   let buttonPress = event.target.parentElement.parentElement
-   console.log(event.target.parentElement)
-    console.log(buttonPress.innerText)
-    console.log(allPlaylists)
-})
+   let selectedDiv = event.target.closest('.div-playlist-name')
+   let selectedClassName = event.target.className
+   if(selectedClassName === 'delete-btn'){
+    fetch(`http://localhost:3000/playlists/${selectedDiv.dataset.id}`,{
+        method: 'Delete'})
+
+    selectedDiv.remove()
+    }
+   })
+
 
 
 
@@ -118,7 +125,7 @@ sInput.addEventListener('input', event => {
     filtered = allTitles.filter(title => title.toLowerCase().includes(userInput))
     console.log(filtered)
     songList.innerText = ""
-    renderSongs(filtered)
+    renderEach(filtered)
 })
 
 
@@ -126,12 +133,12 @@ banner.addEventListener('click', event => {
     let selection = event.target.innerText
     if (selection === 'Songs'){
         songList.innerHTML = ""
-        renderSongs(allTitles)
+        renderEach(allTitles)
     }
     if (selection === 'Artists'){
         songList.innerHTML = ""
-        console.log(allArtistsName)
-        renderArtists(allArtistsName)
+        allArtistsName.forEach(artist => renderArtist(artist))
+        
     }
 })
 
@@ -158,8 +165,9 @@ fetch('http://localhost:3000/playlist_songs')
     allPlaylistsName = allPlaylists.map(playlist => playlist.name)
     allTitles = allSongs.map(song => song.name)
     allArtistsName = allArtists.map(artist => artist.name)
-    renderSongs(allTitles)
-    renderArtists(allArtistsName)
-    renderPlaylists(allPlaylistsName)
+    renderEach(allTitles, allPlaylists, allArtistsName)
+    // renderSongs(allTitles)
+    // renderArtists(allArtistsName)
+    // renderPlaylists(allPlaylists)
     console.log(allSongs)
 })
