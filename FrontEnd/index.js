@@ -67,7 +67,7 @@ function renderArtists(artists){
 
 function renderPlaylists(playlists){
     playlists.forEach(playlist => {
-        console.log(playlist)
+        
         let div = document.createElement('div')
         div.className = 'div-playlist-name'
         div.innerHTML = `${playlist} <button><img class='delete-btn' src='songData/jpg/delete.png'></button>`
@@ -102,9 +102,12 @@ playForm.addEventListener('submit', event => {
     modal.style.display = 'none'
 })
 
-// playlistCon.addEventListener('click', event => {
-//     console.dir(event.target)
-// })
+playlistCon.addEventListener('click', event => {
+   let buttonPress = event.target.parentElement.parentElement
+   console.log(event.target.parentElement)
+    console.log(buttonPress.innerText)
+    console.log(allPlaylists)
+})
 
 
 
