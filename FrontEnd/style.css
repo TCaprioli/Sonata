@@ -4,9 +4,9 @@ html,body {
     margin:0;
     
 }
-h1, h2, h3, h4, h5, h6{
+ h2, h3, h4, h5, h6{
     line-height: 10px; 
-   
+   color: white;
     
   }
   li {
@@ -24,7 +24,16 @@ position: relative;
 background: #FFC48C;
 height: 100px;
 width: 100%;
-border: 2px solid #0B0A0A
+border: 2px solid #0B0A0A;
+text-align: center;
+
+}
+
+#site-title{
+font-style: italic;
+font-family: 'Josefin Sans', sans-serif;
+font-size: 50;
+text-shadow: 4px 4px 4px #aaa;
 }
 
 #footer {
@@ -35,15 +44,15 @@ border: 2px solid #0B0A0A
 }
 
 #col1 {
-background: #BAE4E5;
+background: rgb(24, 49, 87);
 }
 
 #col2 {
-background:#BAE4E5;
+background:rgb(24, 49, 87);
 }
 
 #col3 {
-background: #BAE4E5;
+background: rgb(24, 49, 87);
 }
 
 .column.side{
@@ -80,7 +89,7 @@ box-shadow: 2.5px 5px #888888;
 
 #song-container {
     position: absolute;
-    background: white;
+    background: #FFC48C;
     text-align: center;
     width: 200px;
     height: 250px;
@@ -93,7 +102,7 @@ box-shadow: 2.5px 5px #888888;
 
 #playlist-container {
     position: absolute;
-    background: white;
+    background: #FFC48C;
     text-align: center;
     width: 200px;
     height: 250px;
@@ -106,12 +115,13 @@ box-shadow: 2.5px 5px #888888;
 
 #song-detail {
     position: absolute;
-    background: #BAE4E5;
+    background: rgb(24, 49, 87);
     text-align: center;
     width: 290px;
     height: 80px;
     top: 560;
     left: 520;
+    
 }
 
 
