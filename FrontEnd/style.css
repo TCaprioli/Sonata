@@ -2,12 +2,12 @@ html,body {
     height:100%;
     padding: 0;
     margin:0;
-    
+
 }
  h2, h3, h4, h5, h6{
-    line-height: 10px; 
+    line-height: 10px;
    color: white;
-    
+
   }
   li {
     list-style-type: none;
@@ -121,7 +121,7 @@ box-shadow: 2.5px 5px #888888;
     height: 80px;
     top: 560;
     left: 520;
-    
+
 }
 
 
@@ -132,17 +132,17 @@ height: 30px;
 .div-song-name:hover{
     background: #FFC48C;
     cursor: default;
-   
+
 }
 
 .div-artist-name{
     height: 30px;
     }
-    
+
 .div-artist-name:hover{
     background: #FFC48C;
     cursor: default;
-    
+
 }
 
 #btn{
@@ -173,7 +173,7 @@ height: 30px;
 form {
     padding: 1em;
   }
-  
+
 form input,
 form textarea {
     display: block;
@@ -183,7 +183,7 @@ form textarea {
     padding: 0.25em 1em;
     margin: 1em 0 0.5em;
   }
-  
+
 form input[type=submit] {
     margin: 1em 0 0 0;
     padding: 1em;
@@ -191,18 +191,18 @@ form input[type=submit] {
     font-weight: 600;
     cursor: pointer;
 }
- 
+
 .div-playlist-name{
     height: 30px;
 }
-    
+
 .div-playlist-name:hover{
     background: #FFC48C;
-    cursor: default;   
+    cursor: default;
 }
 
 #banner-title{
-    cursor: default; 
+    cursor: default;
 }
 #s-choice:hover {
     background: #FFC48C
@@ -243,8 +243,8 @@ form input[type=submit] {
 .div-playlistsong-name{
     height: 30px;
 }
-    
+
 .div-playlistsong-name:hover{
     background: #FFC48C;
-    cursor: default;   
+    cursor: default;
 }

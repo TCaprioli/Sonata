@@ -36,7 +36,15 @@ s7 = Song.create(name: "Shea Butter Baby", mp3: "shea-butter-baby.mp3", cover_ar
 s8 = Song.create(name: "When I See you", mp3: "when-i-see-you.mp3", cover_art: "when-i-see-you.jpg", artist_id: a8.id)
 s9 = Song.create(name: "Tempted To Touch", mp3: "tempted-to-touch.mp3", cover_art: "tempted-to-touch.jpg", artist_id: a7.id)
 s10 = Song.create(name: "Dreams", mp3: "dreams.mp3", cover_art: "dreams.jpg", artist_id: a5.id)
-s11 = Song.create(name: "Tadow", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
+s11 = Song.create(name: "Work Shit Out", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
+# s11 = Song.create(name: "Tadow", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
+# s11 = Song.create(name: "Tadow", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
+# s11 = Song.create(name: "Tadow", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
+# s11 = Song.create(name: "Tadow", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
+# s11 = Song.create(name: "Tadow", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
+# s11 = Song.create(name: "Tadow", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
+# s11 = Song.create(name: "Tadow", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
+# s11 = Song.create(name: "Tadow", mp3: "tadow.mp3", cover_art: "tadow.jpg", artist_id: a9.id)
 
 p1 = Playlist.create(name:"playlist 1", user_id: u1.id)
 
