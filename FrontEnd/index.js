@@ -12,7 +12,10 @@ let art = document.querySelector('#art')
 let player = document.querySelector('#song-player')
 let titleText = document.querySelector('#title')
 let artist = document.querySelector('#artist')
-
+let likeBtn = document.querySelector('#like-btn')
+let likeFormCon = document.querySelector('#like-form-container')
+let likeForm = document.querySelector('#like-form-container')
+let select = document.querySelector('#like-drop')
 
 //column 3 elements
 let playlistCon = document.querySelector('#playlist-container')
@@ -71,11 +74,24 @@ function renderPlaylist(playlist){
     div.className = 'div-playlist-name'
     div.innerHTML = `${playlist.name} <button><img class='delete-btn' src='songData/jpg/delete.png'></button>`
     playlistSpan.append(div)
+
+
+
 }
 
 function renderEach(songs, playlists){
     songs.forEach(song => renderSong(song))
-    playlists.forEach(playlist => renderPlaylist(playlist))
+    playlists.forEach(playlist => {renderPlaylist(playlist)
+    renderLikeForm(playlist)})
+}
+
+function renderLikeForm(playlist){
+    
+    let option = document.createElement('option')
+    option.value = playlist.id
+    option.innerText = playlist.name
+    select.append(option)
+
 }
 // //-------------------------------------------------------------------------
 
@@ -96,7 +112,7 @@ playForm.addEventListener('submit', event => {
     .then(resp => resp.json())
     .then(json => renderPlaylist(json))
 
-
+    playForm.reset()
     modal.style.display = 'none'
 })
 //playlist manipulation
@@ -167,6 +183,25 @@ search.addEventListener('mouseover', event => {
     searchInput.style.display = 'none'}
 })
 
+likeBtn.addEventListener('click', event =>{
+    
+    if(likeFormCon.style.display === 'none'){
+        likeFormCon.style.display = 'block'
+    }
+    else{
+        likeFormCon.style.display ='none'
+    }
+    
+})
+
+
+
+likeForm.addEventListener('submit', event =>{
+    event.preventDefault()
+    
+    likeFormCon.style.display ='none'
+    likeForm.reset()
+})
    
     
 

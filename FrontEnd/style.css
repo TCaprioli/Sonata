@@ -218,3 +218,14 @@ form input[type=submit] {
 #like-btn:hover{
     background: rgba(0, 0, 0, 0.75);
 }
+
+#like-form-container{
+    position: fixed;
+    height:100;
+    width:110;
+    background: #FFC48C;
+    z-index: 1;
+    border-radius: 25px;
+    left: 800;
+    top: 435;
+}
