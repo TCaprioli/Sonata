@@ -108,7 +108,7 @@ box-shadow: 2.5px 5px #888888;
     position: absolute;
     background: #BAE4E5;
     text-align: center;
-    width: 280px;
+    width: 290px;
     height: 80px;
     top: 560;
     left: 520;
@@ -149,7 +149,7 @@ height: 30px;
     background-color: rgba(0, 0, 0, 0.75);
   }
 
-  #new-playlist-form {
+#new-playlist-form {
     background-color: #FFC48C;
     height: 200px;
     width: 400px;
@@ -164,8 +164,8 @@ form {
     padding: 1em;
   }
   
-  form input,
-  form textarea {
+form input,
+form textarea {
     display: block;
     font-size: 0.8rem;
     width: 100%;
@@ -174,39 +174,47 @@ form {
     margin: 1em 0 0.5em;
   }
   
-  form input[type=submit] {
+form input[type=submit] {
     margin: 1em 0 0 0;
     padding: 1em;
     width: auto;
     font-weight: 600;
     cursor: pointer;
-  }
+}
  
-  .div-playlist-name{
+.div-playlist-name{
     height: 30px;
-    }
+}
     
-    .div-playlist-name:hover{
-        background: #FFC48C;
-        cursor: default;
-       
-    }
+.div-playlist-name:hover{
+    background: #FFC48C;
+    cursor: default;   
+}
 
-    #banner-title{
-        cursor: default; 
-    }
-    #s-choice:hover {
-        background: #FFC48C
-    }
+#banner-title{
+    cursor: default; 
+}
+#s-choice:hover {
+    background: #FFC48C
+}
 
-    #a-choice:hover {
-        background: #FFC48C
-    }
+#a-choice:hover {
+    background: #FFC48C
+}
 
-    #search {
-        height:15px;
-        width:15px;
-    }
- .delete-btn{
-     text-align: right;
- }
+#search {
+    height:15px;
+    width:15px;
+}
+
+
+#like-btn{
+    position: relative;
+    border-radius: 50%;
+    top: 5;
+    right: 0;
+}
+
+#like-btn:hover{
+    background: rgba(0, 0, 0, 0.75);
+}

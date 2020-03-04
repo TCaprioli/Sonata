@@ -4,7 +4,7 @@ let searchInput = songCon.querySelector('.searchInput')
 let sInput = songCon.querySelector('#input')
 let songList = document.querySelector('#song-list')
 let search = document.querySelector('#search')
-let banner = document.querySelector('#banner-title')
+let songBanner = document.querySelector('#song-banner-title')
 
 
 //column 2 elements
@@ -15,9 +15,11 @@ let artist = document.querySelector('#artist')
 
 
 //column 3 elements
-let playlistCon = document.querySelector('#playlist-list')
+let playlistCon = document.querySelector('#playlist-container')
 let playForm = document.querySelector('#new-playlist-form')
 let pInput = playForm.querySelector('input')
+let playlistBanner = document.querySelector('#playlist-banner-title')
+let playlistSpan = document.querySelector('#playlist-list')
 
 
 //global data
@@ -46,7 +48,7 @@ function renderSong(title){
     div.addEventListener('click', event => {
         
         artist.innerText = newSelectedArtist.name
-        titleText.innerText = title
+        titleText.innerHTML = `${title} <img id='like-btn'src='songData/jpg/like.png'>`
         art.src = `songData/jpg/${selectedSong.cover_art}`
         player.src = `songData/mp3/${selectedSong.mp3}`     
     })  
@@ -68,12 +70,11 @@ function renderPlaylist(playlist){
     div.dataset.id = playlist.id
     div.className = 'div-playlist-name'
     div.innerHTML = `${playlist.name} <button><img class='delete-btn' src='songData/jpg/delete.png'></button>`
-    playlistCon.append(div)
+    playlistSpan.append(div)
 }
 
-function renderEach(songs, playlists, artists){
+function renderEach(songs, playlists){
     songs.forEach(song => renderSong(song))
-    artists.forEach(artist => renderArtist(artist))
     playlists.forEach(playlist => renderPlaylist(playlist))
 }
 // //-------------------------------------------------------------------------
@@ -84,11 +85,6 @@ function renderEach(songs, playlists, artists){
 playForm.addEventListener('submit', event => {
     event.preventDefault()
      
-    let div = document.createElement('div')
-    div.className = 'div-playlist-name'
-    div.innerText = pInput.value
-    playlistCon.append(div)
-    console.log(pInput.value)
     fetch("http://localhost:3000/playlists",{
         method: 'POST',
         headers: {
@@ -98,12 +94,13 @@ playForm.addEventListener('submit', event => {
         user_id: 2})
     })
     .then(resp => resp.json())
-    .then(json => console.log(json))
+    .then(json => renderPlaylist(json))
 
 
     modal.style.display = 'none'
 })
-
+//playlist manipulation
+//delete, switch view
 playlistCon.addEventListener('click', event => {
    let selectedDiv = event.target.closest('.div-playlist-name')
    let selectedClassName = event.target.className
@@ -111,10 +108,30 @@ playlistCon.addEventListener('click', event => {
     fetch(`http://localhost:3000/playlists/${selectedDiv.dataset.id}`,{
         method: 'Delete'})
 
-    selectedDiv.remove()
-    }
-   })
+    selectedDiv.remove()}
 
+    if(selectedClassName === 'div-playlist-name'){
+        playlistBanner.innerHTML = `${selectedDiv.innerText} <button><img class='home-btn' src='songData/jpg/home.png'></button>`
+        playlistSpan.innerHTML = ''
+    }
+    
+    if(selectedClassName === 'home-btn'){
+        playlistBanner.innerText = 'Playlists'
+        let newAddBtn = document.createElement('button')
+        newAddBtn.id = 'btn'
+        newAddBtn.innerText = '+'
+        playlistBanner.append(newAddBtn)
+        playlistSpan.innerHTML = ''
+        allPlaylists.forEach(playlist => renderPlaylist(playlist))
+    }
+
+    if(event.target.id === 'btn'){
+        modal.style.display = 'block'
+    }
+    
+})
+
+const modal = document.querySelector("#modal")
 
 
 
@@ -129,7 +146,7 @@ sInput.addEventListener('input', event => {
 })
 
 
-banner.addEventListener('click', event => {
+songBanner.addEventListener('click', event => {
     let selection = event.target.innerText
     if (selection === 'Songs'){
         songList.innerHTML = ""
@@ -165,9 +182,6 @@ fetch('http://localhost:3000/playlist_songs')
     allPlaylistsName = allPlaylists.map(playlist => playlist.name)
     allTitles = allSongs.map(song => song.name)
     allArtistsName = allArtists.map(artist => artist.name)
-    renderEach(allTitles, allPlaylists, allArtistsName)
-    // renderSongs(allTitles)
-    // renderArtists(allArtistsName)
-    // renderPlaylists(allPlaylists)
-    console.log(allSongs)
+    renderEach(allTitles, allPlaylists)
+
 })
