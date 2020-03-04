@@ -222,10 +222,19 @@ form input[type=submit] {
 #like-form-container{
     position: fixed;
     height:100;
-    width:110;
+    width:135;
     background: #FFC48C;
     z-index: 1;
     border-radius: 25px;
     left: 800;
     top: 435;
+}
+
+.div-playlistsong-name{
+    height: 30px;
+}
+    
+.div-playlistsong-name:hover{
+    background: #FFC48C;
+    cursor: default;   
 }

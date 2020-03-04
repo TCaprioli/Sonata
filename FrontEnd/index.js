@@ -32,6 +32,7 @@ let allPlaylists =[];
 let allArtistsName =[];
 let allTitles =[];
 let allPlaylistsName =[];
+let  allPlaylistSongs =[];
 
 
 //-------------------------Render Functions----------------------------------
@@ -49,9 +50,10 @@ function renderSong(title){
     let newSelectedArtist = allArtists.find(song => song.id === selectedSong.artist_id)
 
     div.addEventListener('click', event => {
-        
         artist.innerText = newSelectedArtist.name
-        titleText.innerHTML = `${title} <img id='like-btn'src='songData/jpg/like.png'>`
+        titleText.innerText = title
+        likeBtn.dataset.id = selectedSong.id
+        titleText.append(likeBtn)
         art.src = `songData/jpg/${selectedSong.cover_art}`
         player.src = `songData/mp3/${selectedSong.mp3}`     
     })  
@@ -74,15 +76,36 @@ function renderPlaylist(playlist){
     div.className = 'div-playlist-name'
     div.innerHTML = `${playlist.name} <button><img class='delete-btn' src='songData/jpg/delete.png'></button>`
     playlistSpan.append(div)
-
-
-
 }
+
+function renderPlaylistSong(title){
+    
+    let div = document.createElement('div')
+        div.dataset.id = title.id
+        div.className = 'div-playlistsong-name'
+        div.innerHTML = title
+        playlistSpan.append(div)
+        
+
+        let selectedSong = allSongs.find(song => song.name === title)
+        let newSelectedArtist = allArtists.find(song => song.id === selectedSong.artist_id)
+        div.addEventListener('click', event => {
+            console.log('boop')
+            artist.innerText = newSelectedArtist.name
+            titleText.innerText = title
+            likeBtn.dataset.id = selectedSong.id
+            titleText.append(likeBtn)
+            art.src = `songData/jpg/${selectedSong.cover_art}`
+            player.src = `songData/mp3/${selectedSong.mp3}`     
+        })  
+}
+
 
 function renderEach(songs, playlists){
     songs.forEach(song => renderSong(song))
     playlists.forEach(playlist => {renderPlaylist(playlist)
     renderLikeForm(playlist)})
+    
 }
 
 function renderLikeForm(playlist){
@@ -110,7 +133,12 @@ playForm.addEventListener('submit', event => {
         user_id: 2})
     })
     .then(resp => resp.json())
-    .then(json => renderPlaylist(json))
+    .then(json => {renderPlaylist(json)
+                 allPlaylists.push(json)
+                 renderLikeForm(json)
+                 console.log(allPlaylists)
+
+    })
 
     playForm.reset()
     modal.style.display = 'none'
@@ -127,8 +155,17 @@ playlistCon.addEventListener('click', event => {
     selectedDiv.remove()}
 
     if(selectedClassName === 'div-playlist-name'){
+        playlistSpan
         playlistBanner.innerHTML = `${selectedDiv.innerText} <button><img class='home-btn' src='songData/jpg/home.png'></button>`
         playlistSpan.innerHTML = ''
+        
+        let selectedPlaylist = allPlaylistSongs.filter(playlist_song => playlist_song.playlist_id == selectedDiv.dataset.id)
+        let selectedSongIds = selectedPlaylist.map(playlistSong => playlistSong.song_id)
+        let newSongs = allSongs.filter(song => selectedSongIds.includes(song.id)).map(song => song.name)
+        console.log(newSongs)
+            
+        newSongs.forEach(title => {renderPlaylistSong(title)})
+        
     }
     
     if(selectedClassName === 'home-btn'){
@@ -185,6 +222,7 @@ search.addEventListener('mouseover', event => {
 
 likeBtn.addEventListener('click', event =>{
     
+    
     if(likeFormCon.style.display === 'none'){
         likeFormCon.style.display = 'block'
     }
@@ -198,9 +236,27 @@ likeBtn.addEventListener('click', event =>{
 
 likeForm.addEventListener('submit', event =>{
     event.preventDefault()
-    
+
+    let selectValue = select.value
+    let likedSong = likeBtn.dataset.id
+
+    fetch('http://localhost:3000/playlist_songs',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'},
+        body: JSON.stringify({playlist_id: selectValue, song_id: likedSong})
+    })
+    .then(resp => resp.json())
+    .then(newPlayListSong => {
+        let jsonSong = allSongs.filter(song => song.id == newPlayListSong.song_id)
+        let newSong =jsonSong.reduce(song => song.name)
+        renderPlaylistSong(newSong.name)
+        allPlaylistSongs.push(newPlayListSong)
+    })
+
     likeFormCon.style.display ='none'
-    likeForm.reset()
+    
 })
    
     
@@ -214,6 +270,7 @@ fetch('http://localhost:3000/playlist_songs')
     allArtists = contentObject.artists
     allUsers = contentObject.users
     allPlaylists = contentObject.playlists
+    allPlaylistSongs = contentObject.playlist_songs
     allPlaylistsName = allPlaylists.map(playlist => playlist.name)
     allTitles = allSongs.map(song => song.name)
     allArtistsName = allArtists.map(artist => artist.name)
