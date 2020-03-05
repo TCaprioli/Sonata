@@ -59,6 +59,7 @@ Song.create(name: "Atlas", mp3: "atlas.mp3", cover_art: "atlas.jpg", artist_id: 
 Song.create(name: "Givin' Up", mp3: "givin-up.mp3", cover_art: "givin-up.jpg", artist_id: a20.id)
 Song.create(name: "Look", mp3: "look.mp3", cover_art: "look.jpg", artist_id: a21.id)
 Song.create(name: "Goodbye Horses", mp3: "goodbye-horses.mp3", cover_art: "goodbye-horses.jpg", artist_id: a14.id)
+Song.create(name: "BMO", mp3: "bmo.mp3", cover_art: "bmo.jpg", artist_id: a3.id)
 
 p1 = Playlist.create(name:"playlist 1", user_id: u1.id)
 
