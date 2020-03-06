@@ -29,6 +29,7 @@ let playlistSpan = document.querySelector('#playlist-list')
 let allSongs = [];
 let allArtists =[];
 let allPlaylists =[];
+let allUsers = [];
 let allArtistsName =[];
 let allTitles =[];
 let allPlaylistsName =[];
@@ -121,18 +122,18 @@ function renderLikeForm(playlist){
 //post playlist
 playForm.addEventListener('submit', event => {
     event.preventDefault()
-
+   
     fetch("http://localhost:3000/playlists",{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'},
         body: JSON.stringify({name: pInput.value,
-        user_id: 3})
+        user_id: allUsers[0].id})
     })
     .then(resp => resp.json())
     .then(json => {
-        console.log(json)
+        
         renderPlaylist(json)
         allPlaylists.push(json)
         renderLikeForm(json)
@@ -245,6 +246,7 @@ likeForm.addEventListener('submit', event =>{
     })
     .then(resp => resp.json())
     .then(newPlayListSong => {
+        console.log(newPlayListSong)
         let jsonSong = allSongs.filter(song => song.id == newPlayListSong.song_id)
         let newSong =jsonSong.reduce(song => song.name)
         renderPlaylistSong(newSong.name)
