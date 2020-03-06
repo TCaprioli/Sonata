@@ -127,10 +127,11 @@ playForm.addEventListener('submit', event => {
             'Content-Type': 'application/json',
             'Accept': 'application/json'},
         body: JSON.stringify({name: pInput.value,
-        user_id: 2})
+        user_id: 3})
     })
     .then(resp => resp.json())
     .then(json => {
+        console.log(json)
         renderPlaylist(json)
         allPlaylists.push(json)
         renderLikeForm(json)
