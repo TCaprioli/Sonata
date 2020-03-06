@@ -145,11 +145,15 @@ playForm.addEventListener('submit', event => {
 playlistCon.addEventListener('click', event => {
    let selectedDiv = event.target.closest('.div-playlist-name')
    let selectedClassName = event.target.className
+   
+   
    if(selectedClassName === 'delete-btn'){
+    allPlaylists = findIndex(selectedDiv.dataset.id)
     fetch(`http://localhost:3000/playlists/${selectedDiv.dataset.id}`,{
         method: 'Delete'})
 
-    selectedDiv.remove()}
+    selectedDiv.remove()
+}
 
     if(selectedClassName === 'div-playlist-name'){
         playlistSpan
@@ -266,7 +270,10 @@ function renderInitailArtist(title){
   player.src = `songData/mp3/${selectedSong.mp3}`
 }
 
-
+function findIndex(objId){
+    return allPlaylists.filter(playlist => playlist.id != objId)
+        
+}
 
 
 //fetching data
