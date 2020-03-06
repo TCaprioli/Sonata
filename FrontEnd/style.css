@@ -2,12 +2,12 @@ html,body {
     height:100%;
     padding: 0;
     margin:0;
-    
+
 }
-h1, h2, h3, h4, h5, h6{
-    line-height: 10px; 
-   
-    
+ h2, h3, h4, h5, h6{
+    line-height: 10px;
+   color: white;
+
   }
   li {
     list-style-type: none;
@@ -23,8 +23,18 @@ h1, h2, h3, h4, h5, h6{
 position: relative;
 background: #FFC48C;
 height: 100px;
-width: 100%;
-border: 2px solid #0B0A0A
+width: 99.7%;
+clear: both;
+border: 2px solid #0B0A0A;
+text-align: center;
+
+}
+
+#site-title{
+font-style: italic;
+font-family: 'Josefin Sans', sans-serif;
+font-size: 50;
+text-shadow: 4px 4px 4px #aaa;
 }
 
 #footer {
@@ -34,16 +44,21 @@ clear: both;
 border: 2px solid #0B0A0A
 }
 
+#footer p{
+  padding-top: 25px;
+  text-align: left;
+}
+
 #col1 {
-background: #BAE4E5;
+background: rgb(24, 49, 87);
 }
 
 #col2 {
-background:#BAE4E5;
+background:rgb(24, 49, 87);
 }
 
 #col3 {
-background: #BAE4E5;
+background: rgb(24, 49, 87);
 }
 
 .column.side{
@@ -80,7 +95,7 @@ box-shadow: 2.5px 5px #888888;
 
 #song-container {
     position: absolute;
-    background: white;
+    background: #FFC48C;
     text-align: center;
     width: 200px;
     height: 250px;
@@ -93,7 +108,7 @@ box-shadow: 2.5px 5px #888888;
 
 #playlist-container {
     position: absolute;
-    background: white;
+    background: #FFC48C;
     text-align: center;
     width: 200px;
     height: 250px;
@@ -106,12 +121,13 @@ box-shadow: 2.5px 5px #888888;
 
 #song-detail {
     position: absolute;
-    background: #BAE4E5;
+    background: rgb(24, 49, 87);
     text-align: center;
     width: 290px;
     height: 80px;
     top: 560;
     left: 520;
+
 }
 
 
@@ -122,17 +138,17 @@ height: 30px;
 .div-song-name:hover{
     background: #FFC48C;
     cursor: default;
-   
+
 }
 
 .div-artist-name{
     height: 30px;
     }
-    
+
 .div-artist-name:hover{
     background: #FFC48C;
     cursor: default;
-    
+
 }
 
 #btn{
@@ -163,7 +179,7 @@ height: 30px;
 form {
     padding: 1em;
   }
-  
+
 form input,
 form textarea {
     display: block;
@@ -173,7 +189,7 @@ form textarea {
     padding: 0.25em 1em;
     margin: 1em 0 0.5em;
   }
-  
+
 form input[type=submit] {
     margin: 1em 0 0 0;
     padding: 1em;
@@ -181,18 +197,18 @@ form input[type=submit] {
     font-weight: 600;
     cursor: pointer;
 }
- 
+
 .div-playlist-name{
     height: 30px;
 }
-    
+
 .div-playlist-name:hover{
     background: #FFC48C;
-    cursor: default;   
+    cursor: default;
 }
 
 #banner-title{
-    cursor: default; 
+    cursor: default;
 }
 #s-choice:hover {
     background: #FFC48C
@@ -217,4 +233,24 @@ form input[type=submit] {
 
 #like-btn:hover{
     background: rgba(0, 0, 0, 0.75);
+}
+
+#like-form-container{
+    position: fixed;
+    height:100;
+    width:135;
+    background: #FFC48C;
+    z-index: 1;
+    border-radius: 25px;
+    left: 800;
+    top: 435;
+}
+
+.div-playlistsong-name{
+    height: 30px;
+}
+
+.div-playlistsong-name:hover{
+    background: #FFC48C;
+    cursor: default;
 }

@@ -1,5 +1,7 @@
 class PlaylistSongsController < ApplicationController
+
   def index
+    @playlist_songs = PlaylistSong.all
     @users = User.all
     @playlists = Playlist.all
     @songs = Song.all
@@ -9,10 +11,17 @@ class PlaylistSongsController < ApplicationController
       "users": @users,
       "playlists": @playlists,
       "songs": @songs,
-      "artists": @artist
+      "artists": @artist,
+      "playlist_songs": @playlist_songs
     }
 
     render json: info.to_json(except: [:created_at, :updated_at])
+  end
+
+  def show
+    @playlist_song = PlaylistSong.find(params[:id])
+
+    render json: @playlist_song.to_json(except: [:created_at, :updated_at])
   end
 
   def create
