@@ -8,9 +8,9 @@ class PlaylistsController < ApplicationController
   end
 
   def create
-    @playlist = Playlist.create(playlist_params)
+  playlist = Playlist.create(playlist_params)
 
-    render json: @playlist.to_json(except: [:created_at, :updated_at])
+    render json: playlist
   end
 
   def show

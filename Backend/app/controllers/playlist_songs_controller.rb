@@ -25,8 +25,8 @@ class PlaylistSongsController < ApplicationController
   end
 
   def create
-    @playlist_song = PlaylistSong.create(playlist_song_params)
-    render json: @playlist_song.to_json(except: [:created_at, :updated_at])
+    playlist_song = PlaylistSong.create(playlist_song_params)
+    render json: playlist_song
   end
 
   def destroy
