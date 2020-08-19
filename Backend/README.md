@@ -1,24 +1,19 @@
-# README
+# Sonata-API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+Sonata-API is a RESTful API built on Ruby-on-Rails and POSTgres database.
 
-* Ruby version
+## Endpoints
 
-* System dependencies
+Useful endpoints to be aware of include:
 
-* Configuration
+  * https://sonata-api.herokuapp.com/songs
+  * https://sonata-api.herokuapp.com/playlists
+  * https://sonata-api.herokuapp.com/playlist_songs
 
-* Database creation
+## Relationship
 
-* Database initialization
+In the live demo only one user is being utilized. The entire relationship model is as follows:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Users -> playlists -> playlist_songs <- songs <- artists
